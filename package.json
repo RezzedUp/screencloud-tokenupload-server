@@ -1,0 +1,25 @@
+{
+    "name": "screencloud-tokenupload-server",
+    "version": "1.0.0",
+    "description": "Node implementation for screencloud-tokenupload",
+    "keywords": 
+    [
+        "screencloud", "screencloud-tokenupload", "tokenupload"
+    ],
+    "license": "MIT",
+    "main": "src/server.js",
+    "dependencies": 
+    {
+        "express": "^4.14.0",
+        "body-parser": "^1.15.0"
+    },
+    "repository": 
+    {
+        "type": "git",
+        "url": "https://github.com/RezzedUp/screencloud-tokenupload-server"
+    },
+    "bugs": 
+    {
+        "url": "https://github.com/RezzedUp/screencloud-tokenupload-server/issues"
+    }
+}

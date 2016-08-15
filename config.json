@@ -1,0 +1,10 @@
+{
+    "auth": "--secret-token--",
+    "url": "http://i.your.domain/<%>",
+    "listen":
+    {
+        "port": 3000,
+        "address": "localhost",
+        "proxy": true
+    }
+}
