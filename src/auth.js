@@ -24,7 +24,7 @@ function Auth(token)
     this.watching = [];
     this.banned = [];
 
-    this.check = function(ip, token)
+    this.check = (ip, token) =>
     {
         if (!isString(ip) || !isString(token) || this.isBanned(ip))
         {
@@ -47,7 +47,7 @@ function Auth(token)
         }
     }
 
-    this.watch = function(ip)
+    this.watch = (ip) =>
     {
         let index = this.indexOfWatchedIp(ip),
             suspect;
@@ -70,7 +70,7 @@ function Auth(token)
         }
     }
 
-    this.indexOfWatchedIp = function(ip)
+    this.indexOfWatchedIp = (ip) =>
     {
         for (let index in this.watching)
         {
@@ -82,7 +82,7 @@ function Auth(token)
         }
     }
 
-    this.isBanned = function(ip)
+    this.isBanned = (ip) =>
     {
         return this.banned.includes(ip);
     }

@@ -37,7 +37,7 @@ app.use
 app.use(serveStatic('../html'));
 app.use(serveStatic('../' + config.image.directory));
 
-app.post('/', function(req, res)
+app.post('/', (req, res) =>
 {
     let token = req.body.token,
         image = req.body.image,
@@ -59,14 +59,7 @@ app.post('/', function(req, res)
     }
 });
 
-app.listen(config.listen.port, config.listen.address, 
-    function () 
-    {
-        console.log('\n> ' + config.name + ' [' + config.listen.address + ':' + config.listen.port + ']\n');
-    }
-);
-
-module.exports = 
+app.listen(config.listen.port, config.listen.address, () =>
 {
-    config: config
-};
+    console.log('\n> ' + config.name + ' [' + config.listen.address + ':' + config.listen.port + ']\n');
+});
