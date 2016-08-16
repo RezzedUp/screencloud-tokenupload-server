@@ -41,7 +41,7 @@ app.post('/', function(req, res)
 
     if (config.listen.proxy)
     {
-	    ipAddress = req.headers['x-forwarded-for'].toString();
+        ipAddress = req.headers['x-forwarded-for'].toString();
     }
     else
     {
@@ -52,12 +52,12 @@ app.post('/', function(req, res)
 
     if (token == undefined || image == undefined) 
     {
-		res.json({"error": "Invalid input."});
-	}
+        res.json({"error": "Invalid input."});
+    }
     else if (token != AUTH_TOKEN) 
     {
-		res.json({"error": "Bad auth token."});
-	}
+        res.json({"error": "Bad auth token."});
+    }
     else 
     {
         // TODO: upload file
