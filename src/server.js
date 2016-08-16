@@ -1,23 +1,19 @@
 "use strict";
 
-var fs = require('fs');
-
-var express = require('express');
-var app = express();
-
-var config = require('../config.json');
-var Auth = require('./auth');
+var fs = require('fs'),
+    express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    serveStatic = require('serve-static'),
+    config = require('../config.json'),
+    Auth = require('./auth');
 
 const auth = new Auth(config.auth);
-
-var bodyParser = require('body-parser');
 
 app.use
 ( 
     bodyParser.json({limit: config.image.size}) 
 );
-
-var serveStatic = require('serve-static');
 
 app.use(serveStatic('../html'));
 app.use(serveStatic('../' + config.image.directory));
