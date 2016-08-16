@@ -1,10 +1,16 @@
 {
     "auth": "--secret-token--",
-    "url": "http://i.your.domain/<%>",
+    "url": "http://your.domain/<%>",
     "listen":
     {
         "port": 3000,
         "address": "localhost",
         "proxy": true
+    },
+    "image":
+    {
+        "size": "5mb",
+        "directory": "images",
+        "nameLength": 12
     }
 }
