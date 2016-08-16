@@ -6,8 +6,9 @@ var express = require('express');
 var app = express();
 
 var config = require('../config.json');
+var Auth = require('./auth');
 
-const AUTH_TOKEN = config.auth;
+const auth = new Auth(config.auth);
 
 (function ()
     {
@@ -37,24 +38,15 @@ app.post('/', function(req, res)
 {
     let token = req.body.token,
         image = req.body.image,
-        ipAddress;
-
-    if (config.listen.proxy)
-    {
-        ipAddress = req.headers['x-forwarded-for'].toString();
-    }
-    else
-    {
-        ipAddress = req.connection.remoteAddress;
-    }
+        ipAddress = (config.listen.proxy) 
+                  ? req.headers['x-forwarded-for'].toString()
+                  : req.connection.remoteAddress;
     
-    // TODO: banned IPs
-
     if (token == undefined || image == undefined) 
     {
         res.json({"error": "Invalid input."});
     }
-    else if (token != AUTH_TOKEN) 
+    else if (!auth.check(ipAddress, token)) 
     {
         res.json({"error": "Bad auth token."});
     }
