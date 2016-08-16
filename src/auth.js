@@ -1,3 +1,8 @@
+"use strict";
+
+let config = require('../config.json'),
+    debug = config.debug;
+
 function isString(str)
 {
     return (typeof str == 'string');
@@ -21,17 +26,23 @@ function Auth(token)
 
     this.check = function(ip, token)
     {
-        if (!isString(ip) || !isString(token) || isBanned(ip))
+        if (!isString(ip) || !isString(token) || this.isBanned(ip))
         {
+            if (debug) console.log('IP ' + ip + ' with token ' + token + ' is banned');
+
             return false;
         }
         else if (token != this.token)
         {
-            watch(ip);
+            if (debug) console.log('IP ' + ip + ' tried authenticating with token ' + token);
+
+            this.watch(ip);
             return false;
         }
         else
         {
+            if (debug) console.log('IP ' + ip + ' successfully authenticated');
+
             return true;
         }
     }
@@ -43,25 +54,27 @@ function Auth(token)
 
         if (index > -1)
         {
-            suspect = watching[index];
+            suspect = this.watching[index];
             suspect.warnings += 1;
 
             if (suspect.warnings > 4)
             {
-                banned.push(suspect.ip);
+                this.banned.push(suspect.ip);
+                this.watching.splice(index, 1);
             }
         }
         else
         {
             suspect = new Suspect(ip);
+            this.watching.push(suspect);
         }
     }
 
     this.indexOfWatchedIp = function(ip)
     {
-        for (let index in watching)
+        for (let index in this.watching)
         {
-            if (watching[index].ip == ip)
+            if (this.watching[index].ip == ip)
             {
                 return index;
             }
@@ -71,7 +84,7 @@ function Auth(token)
 
     this.isBanned = function(ip)
     {
-        return banned.includes(ip);
+        return this.banned.includes(ip);
     }
 }
 

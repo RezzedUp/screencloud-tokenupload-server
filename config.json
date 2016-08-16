@@ -12,5 +12,6 @@
         "size": "5mb",
         "directory": "images",
         "nameLength": 12
-    }
+    },
+    "debug": true
 }

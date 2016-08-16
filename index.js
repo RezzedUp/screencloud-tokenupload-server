@@ -1,4 +1,4 @@
-var fs = require('fs'),
+let fs = require('fs'),
     server = require('./src/server'),
     config = server.config;
 
