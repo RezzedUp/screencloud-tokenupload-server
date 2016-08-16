@@ -58,7 +58,7 @@ function Uploader(dir, url)
             .digest('base64').replace(/\W+/g, "");
 
         let dir = this.getDirectory(),
-            length = 10;
+            length = config.image.nameLength;
 
         for (let i = 0; i < id.length - length; i++)
         {
