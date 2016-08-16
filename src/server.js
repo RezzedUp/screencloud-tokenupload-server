@@ -10,18 +10,6 @@ var Auth = require('./auth');
 
 const auth = new Auth(config.auth);
 
-(function ()
-    {
-        let dir = '../' + config.image.directory;
-        let stats = fs.stat(dir);
-
-        if (!stats.isDirectory())
-        {
-            fs.mkdirSync(dir);
-        }
-    }
-)();
-
 var bodyParser = require('body-parser');
 
 app.use
@@ -55,6 +43,13 @@ app.post('/', function(req, res)
         // TODO: upload file
     }
 });
+
+app.listen(config.listen.port, config.listen.address, 
+    function () 
+    {
+        console.log('\n> screencloud-tokenupload-server [' + config.listen.address + ':' + config.listen.port + ']\n');
+    }
+);
 
 module.exports = 
 {
