@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let config = require('../config.json'),
     debug = config.debug;

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let fs = require('fs'),
     express = require('express'),
@@ -8,9 +8,9 @@ let fs = require('fs'),
     config = require('../config.json'),
     Auth = require('./auth');
 
-const imgdir = __dirname + "/" + config.image.directory;
+const dir = __dirname + "/../" + config.image.directory;
 
-fs.mkdir(imgdir, (err, stats) =>
+fs.mkdir(dir, (err, stats) =>
 {
     if (err)
     {

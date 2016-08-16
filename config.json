@@ -1,6 +1,7 @@
 {
     "auth": "--secret-token--",
     "url": "http://your.domain/<%>",
+    "name": "screencloud-tokenupload-server",
     "listen":
     {
         "port": 3000,
