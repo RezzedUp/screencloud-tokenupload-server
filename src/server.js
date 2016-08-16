@@ -8,6 +8,23 @@ let fs = require('fs'),
     config = require('../config.json'),
     Auth = require('./auth');
 
+const imgdir = __dirname + "/" + config.image.directory;
+
+fs.mkdir(imgdir, (err, stats) =>
+{
+    if (err)
+    {
+        if (err.code != 'EEXIST')
+        {
+            console.log(err);
+        }
+    }
+    else
+    {
+        console.log('[+] Created images directory.');
+    }
+});
+
 const auth = new Auth(config.auth);
 
 app.use
