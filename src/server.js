@@ -6,7 +6,8 @@ let fs = require('fs'),
     bodyParser = require('body-parser'),
     serveStatic = require('serve-static'),
     config = require('../config.json'),
-    Auth = require('./auth');
+    Auth = require('./auth'),
+    Uploader = require('./upload');
 
 const dir = __dirname + "/../" + config.image.directory;
 
@@ -26,6 +27,7 @@ fs.mkdir(dir, (err, stats) =>
 });
 
 const auth = new Auth(config.auth);
+const uploader = new Uploader(dir, config.url);
 
 app.use
 ( 
@@ -53,14 +55,14 @@ app.post('/', function(req, res)
     }
     else 
     {
-        // TODO: upload file
+        res.json(uploader.upload(image));
     }
 });
 
 app.listen(config.listen.port, config.listen.address, 
     function () 
     {
-        console.log('\n> screencloud-tokenupload-server [' + config.listen.address + ':' + config.listen.port + ']\n');
+        console.log('\n> ' + config.name + ' [' + config.listen.address + ':' + config.listen.port + ']\n');
     }
 );
 
