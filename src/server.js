@@ -34,8 +34,8 @@ app.use
     bodyParser.json({limit: config.image.size}) 
 );
 
-app.use(serveStatic('../html'));
-app.use(serveStatic('../' + config.image.directory));
+app.use(serveStatic(__dirname + '../html'));
+app.use(serveStatic(dir));
 
 app.post('/', (req, res) =>
 {
@@ -47,16 +47,21 @@ app.post('/', (req, res) =>
     
     if (token == undefined || image == undefined) 
     {
-        res.json({"error": "Invalid input."});
+        res.json({'error': 'Invalid input.'});
     }
     else if (!auth.check(ipAddress, token)) 
     {
-        res.json({"error": "Bad auth token."});
+        res.json({'error': 'Invalid token.'});
     }
     else 
     {
         res.json(uploader.upload(image));
     }
+});
+
+app.use((req, res, next) => 
+{
+    res.status(404).json({'error': 'Page not found.'});
 });
 
 app.listen(config.listen.port, config.listen.address, () =>
