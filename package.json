@@ -2,10 +2,6 @@
     "name": "screencloud-tokenupload-server",
     "version": "1.0.0",
     "description": "Node implementation for screencloud-tokenupload",
-    "keywords": 
-    [
-        "screencloud", "screencloud-tokenupload", "tokenupload"
-    ],
     "license": "MIT",
     "main": "src/server.js",
     "dependencies": 
