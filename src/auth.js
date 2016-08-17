@@ -3,17 +3,8 @@
 let config = require('../config.json'),
     debug = config.debug;
 
-function isString(str)
-{
-    return (typeof str == 'string');
-}
-
 function Suspect(ip)
 {
-    if (!isString(ip))
-    {
-        throw 'Attempted to create a new Suspect with invalid ip.';
-    }
     this.ip = ip;
     this.warnings = 1;
 }
@@ -26,7 +17,7 @@ function Auth(token)
 
     this.check = (ip, token) =>
     {
-        if (!isString(ip) || !isString(token) || this.isBanned(ip))
+        if (this.isBanned(ip))
         {
             if (debug) console.log('IP ' + ip + ' with token ' + token + ' is banned');
 

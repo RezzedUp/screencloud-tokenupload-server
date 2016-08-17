@@ -7,21 +7,11 @@ let fs = require('fs'),
 
 function Uploader(dir, url)
 {
-    if (typeof dir != 'string' || typeof url != 'string')
-    {
-        throw 'Invalid parameters: both should be strings.';
-    }
-
     this.dir = dir;
     this.url = url;
 
     this.upload = (imgB64) =>
     {
-        if (typeof imgB64 != 'string')
-        {
-            throw 'Invalid parameter: should be a string.';
-        }
-
         let buf = new Buffer(imgB64, 'base64'),
             name = this.getUniqueName(),
             dir = this.getDirectory(),
