@@ -7,7 +7,7 @@ Screencloud Token Upload Server
 
 - Node.js
 - NPM
-- Tmux or Screen *(too keep server alive)* 
+- Tmux or Screen *(to keep server alive)* 
 - Nginx *(optional)*
 
 Installation
