@@ -1,5 +1,5 @@
 Screencloud Token Upload Server
------
+===============================
 
 **screencloud-tokenupload-server** is a node endpoint implementation for the [screencloud-tokenupload plugin](https://github.com/RezzedUp/screencloud-tokenupload).
 
@@ -7,26 +7,26 @@ Screencloud Token Upload Server
 
 - Node.js
 - NPM
-- Tmux or Screen *(too keep server online)* 
+- Tmux or Screen *(too keep server alive)* 
 - Nginx *(optional)*
 
 Installation
------
+------------
 
-
-| Step # | Instructions                      |
-|--------|-----------------------------------|
-| 1 | Either clone this repository or download the repository as a zip (and unzip it on your server). |
-|   | **Clone:**  `git clone https://github.com/RezzedUp/screencloud-tokenupload-server.git` |
-| 2 | `npm install` |
-| 3 | Configure **config.json** |
-| 4 | Start a new Tmux or Screen session |
-| 5 | `npm start` |
+| Step # |                                                                                        |
+|--------|----------------------------------------------------------------------------------------|
+|   1    | Either clone this repository or download the repository as a zip.                      |
+|        | `git clone https://github.com/RezzedUp/screencloud-tokenupload-server.git`             |
+|   2    | `cd screencloud-tokenupload-server`                                                    |
+|        | `npm install`                                                                          |
+|   3    | Configure **config.json**                                                              |
+|   4    | Start a new Tmux or Screen session                                                     |
+|   5    | `npm start`                                                                            |
 
 By default, screencloud-tokenupload-server is set to bind to localhost and be accessed behind a proxy. This is the recommended way to go if you want your server instance to run on port 80.
 
 Example nginx config
------
+--------------------
 
 ```nginx
 server
