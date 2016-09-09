@@ -34,7 +34,7 @@ app.use
     bodyParser.json({limit: config.image.size}) 
 );
 
-app.use(serveStatic(__dirname + '../html'));
+app.use(serveStatic(__dirname + '/../html'));
 app.use(serveStatic(dir));
 
 app.post('/', (req, res) =>
@@ -59,7 +59,7 @@ app.post('/', (req, res) =>
     }
 });
 
-app.use((req, res, next) => 
+app.get('*', (req, res) => 
 {
     res.status(404).json({'error': 'Page not found.'});
 });
