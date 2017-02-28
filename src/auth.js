@@ -3,14 +3,6 @@
 let config = require('../config.json'),
     debug = config.debug;
 
-function Suspect(ip)
-{
-    this.ip = ip;
-    this.firstAccess = new Date();
-    this.warnings = 1;
-    this.isBanned = false;
-}
-
 function Auth(token)
 {
     this.token = token;
@@ -51,8 +43,12 @@ function Auth(token)
 
         if (suspect === undefined)
         {
-            suspect = new Suspect(ip);
-            this.log[ip] = suspect;
+            this.log[ip] =
+            {
+                firstAccess: new Date(),
+                warnings: 1,
+                isBanned: false
+            }
         }
         else
         {
