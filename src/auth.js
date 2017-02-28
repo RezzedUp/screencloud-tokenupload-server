@@ -6,33 +6,40 @@ let config = require('../config.json'),
 function Suspect(ip)
 {
     this.ip = ip;
+    this.firstAccess = new Date();
     this.warnings = 1;
+    this.isBanned = false;
 }
 
 function Auth(token)
 {
     this.token = token;
-    this.watching = [];
-    this.banned = [];
+    this.log = {};
 
     this.check = (ip, token) =>
     {
+        if (debug)
+        {
+            console.log('Current watch log:');
+            console.log(this.log);
+        }
+
         if (this.isBanned(ip))
         {
-            if (debug) console.log('IP ' + ip + ' with token ' + token + ' is banned');
+            if (debug) { console.log('IP ' + ip + ' with token ' + token + ' is banned'); }
 
             return false;
         }
         else if (token != this.token)
         {
-            if (debug) console.log('IP ' + ip + ' tried authenticating with token ' + token);
+            if (debug) { console.log('IP ' + ip + ' tried authenticating with token ' + token); }
 
             this.watch(ip);
             return false;
         }
         else
         {
-            if (debug) console.log('IP ' + ip + ' successfully authenticated');
+            if (debug) { console.log('IP ' + ip + ' successfully authenticated'); }
 
             return true;
         }
@@ -40,42 +47,28 @@ function Auth(token)
 
     this.watch = (ip) =>
     {
-        let index = this.indexOfWatchedIp(ip),
-            suspect;
+        let suspect = this.log[ip];
 
-        if (index > -1)
+        if (suspect === undefined)
         {
-            suspect = this.watching[index];
+            suspect = new Suspect(ip);
+            this.log[ip] = suspect;
+        }
+        else
+        {
             suspect.warnings += 1;
 
             if (suspect.warnings > 4)
             {
-                this.banned.push(suspect.ip);
-                this.watching.splice(index, 1);
+                suspect.isBanned = true;
             }
-        }
-        else
-        {
-            suspect = new Suspect(ip);
-            this.watching.push(suspect);
-        }
-    }
-
-    this.indexOfWatchedIp = (ip) =>
-    {
-        for (let index in this.watching)
-        {
-            if (this.watching[index].ip == ip)
-            {
-                return index;
-            }
-            return -1;
         }
     }
 
     this.isBanned = (ip) =>
     {
-        return this.banned.includes(ip);
+        let suspect = this.log[ip];
+        return (suspect === undefined) ? false : suspect.isBanned;
     }
 }
 
